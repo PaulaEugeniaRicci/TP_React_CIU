@@ -1,3 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Nexa';
+  src: local('Nexa'), url(assets/fonts/NexaText-Trial-Regular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Nexa-light';
+  src: local('Nexa'), url(assets/fonts/Nexa-Trial-Light.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Nexa-bold';
+  src: local('Nexa'), url(assets/fonts/Nexa-Trial-Bold.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Nexa-xbold';
+  src: local('Nexa'), url(assets/fonts/Nexa-Trial-ExtraBold.woff) format('woff');
+}
+
+.nexa{ font-family: 'Nexa'; }
+.nexa-light{ font-family: 'Nexa-light'; }
+.nexa-bold{ font-family: 'Nexa-bold'; }
+.nexa-xbold{ font-family: 'Nexa-xbold'; }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
