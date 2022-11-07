@@ -1,9 +1,9 @@
 import "../assets/css/Styles.css";
+import { useContext, useState } from "react";
+import { CartContext } from '../context/CartContext';
 import { currencyFormat } from "../helpers/currencyFormat";
-import { useState } from 'react';
-import Cart from "./Cart";
 
-const Item = ( { item, items, cart, setCart } ) => {
+const Item = ( { item, sideCart, setCart } ) => {
   
   const styles = {
     text: "nexa-bold tracking-wider h-14",
@@ -11,23 +11,13 @@ const Item = ( { item, items, cart, setCart } ) => {
     button: "btn select-none uppercase text-sm text-white bg-black py-3 px-9 mt-3 nexa"
   }
 
-  const isInCart = (id) => {
-    return cart.some((item) => (item.id === id))
-  } 
+  const {addItem} = useContext(CartContext)
+  const [isInCart, setIsInCart] = useState(false)
 
-  const selectItem = ( id ) => {
-    const selectedItem = items.filter(
-      item => item.id === id
-    )[0];
-
-    if (isInCart(item.id)){
-      let index = cart.indexOf(selectedItem)
-      let auxCart = [...cart]
-      auxCart[index].quantity += 1
-      setCart(auxCart)
-    } else {
-      setCart([...cart, selectedItem])
-    }
+  const addHandler = () => {
+    addItem(item, 1)
+    setIsInCart(true)
+    setCart(!sideCart)
   }
 
   return (
@@ -41,7 +31,7 @@ const Item = ( { item, items, cart, setCart } ) => {
           <div><p className={(styles.text)+" pt-2"}>{item.title}</p></div>
           <div><p className="text-gray-500 nexa-ligth text-sm">{item.concentration}</p></div>
           <div><p className={styles.price}>{currencyFormat(item.price)}</p></div>
-          <button className={styles.button} onClick= { () => selectItem(item.id) }>Comprar</button>
+          <button className={styles.button} onClick= { () => addHandler(item.id) }>Comprar</button>
         </div>
       </div>
     </>

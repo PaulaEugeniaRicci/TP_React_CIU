@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import Item from './Item';
+import SideCart from './SideCart';
+import { products } from './data/products';
 
-const ItemContainer = ( { products, cart, setCart } ) => {
+const ItemContainer = ( ) => {
 
   const {id} = useParams();
+  const [sideCart, setSideCart] = useState(false)
   const [items, setItems] = useState([])
   
   useEffect(()=>{
@@ -18,17 +21,16 @@ const ItemContainer = ( { products, cart, setCart } ) => {
   },[id])
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 max-w-full lg:max-w-7xl m-auto">
-      { items.map((item) => ( 
-        <Item 
-          key={item.id} 
-          item={item}
-          items={items}
-          cart={cart}
-          setCart={setCart}
-        />
-      ) )}
+    <>
+    <div className="relative">
+      <div className={`${sideCart ? "block" : "hidden"} "absolute inset-0 fixed w-full h-full bg-gray-500 bg-opacity-75 z-40`} >
+        <SideCart sideCart={sideCart} setCart={setSideCart}/>
+      </div>
     </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 lg:max-w-7xl m-auto">
+      { items.map((item) => ( <Item key={item.id} item={item} sideCart={sideCart} setCart={setSideCart}/> ) )}
+    </div>
+    </>
   )
 }
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import { HiMenu } from "react-icons/hi";
+import CartWidget from './CartWidget';
 import "../assets/css/Styles.css";
 
 const Header = ( {brand} ) => {
@@ -33,9 +34,10 @@ const Header = ( {brand} ) => {
               </ul>
             </div>
             <Link to='/' className="block cursor-pointer w-60">
-              <h1 alt="Mugler" className={ (styles.brand) + " lg:mx-auto sm:mx-0"}>{ brand }</h1>
+              <h1 alt="Mugler" className={ (styles.brand) + " text-center lg:mx-auto sm:mx-0"}>{ brand }</h1>
             </Link>
             <div className="flex ml-auto lg:ml-0 items-center justify-end space-x-5 lg:w-60">
+              <CartWidget/>
               <button aria-label="open close menu" onClick={() => setDisplayMenu(!displayMenu)} className="lg:hidden focus:outline-none">
                 <HiMenu className='w-5 h-5 text-white'/>
               </button>
