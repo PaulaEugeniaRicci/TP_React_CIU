@@ -1,5 +1,5 @@
 import "../assets/css/Styles.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CartContext } from '../context/CartContext';
 import { currencyFormat } from "../helpers/currencyFormat";
 
@@ -12,11 +12,9 @@ const Item = ( { item, sideCart, setCart } ) => {
   }
 
   const {addItem} = useContext(CartContext)
-  const [isInCart, setIsInCart] = useState(false)
 
   const addHandler = () => {
     addItem(item, 1)
-    setIsInCart(true)
     setCart(!sideCart)
   }
 
